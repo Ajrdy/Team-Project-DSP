@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Data</title>
+    <style>
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Query Data</h2>
+    {% if show_passwords %}
+        <p>Welcome, {{ session.username }} (Role: H)</p>
+    {% else %}
+        <p>Welcome, {{ session.username }} (Role: R)</p>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                {% if show_passwords %}
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>Health History</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in result %}
+                <tr>
+                    <td>{{ user }}</td>
+                    {% if show_passwords %}
+                        <td>Last Name</td>
+                        <td>Gender</td>
+                        <td>Age</td>
+                        <td>Weight</td>
+                        <td>Height</td>
+                        <td>Health History</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        {% for i in range(result|length) %}
+  <tr>
+    <td>{{ result[i].first_name }}</td>
+    <td>{{ result[i].last_name }}</td>
+    <!-- Include other fields as needed -->
+    <td>{{ checksums[i] }}</td>
+  </tr>
+{% endfor %}
+    </table>
+</body>
+</html>
